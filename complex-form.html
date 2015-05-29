@@ -37,15 +37,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       width: 120px;
     }
 
-    gold-email-input {
-      width: 300px;
-      margin-right: 20px;
-    }
-
-    gold-phone-input {
-      width: 200px;
-    }
-
     .country {
       width: 260px;
       margin-right: 20px;
@@ -77,14 +68,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <h4>Quantity: <paper-input name="quantity" class="quantity" value="1" type="number"></paper-input></h4>
       <h4>Contact Information</h4>
 
-
       <paper-input name="name" label="Name" required auto-validate></paper-input>
       <paper-input name="address" label="Address" required auto-validate></paper-input>
-
-      <div class="horizontal layout">
-        <gold-email-input name="email" required auto-validate></gold-email-input>
-        <gold-phone-input name="phone" required auto-validate></gold-phone-input>
-      </div>
+      <gold-email-input name="email" class="flex" required auto-validate></gold-email-input>
+      <gold-phone-input name="phone" class="flex" required auto-validate></gold-phone-input>
 
       <h4>Payment</h4>
 
@@ -93,14 +80,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           label="Sample Valid VISA number">
       </gold-cc-input>
 
-      <div class="horizontal layout">
+      <div class="horizontal layout wrap">
         <gold-cc-expiration-input name="cc-expiration" required auto-validate></gold-cc-expiration-input>
         <gold-cc-cvc-input name="cc-cvc" required auto-validate></gold-cc-cvc-input>
         <gold-zip-input name="zip" required auto-validate></gold-zip-input>
       </div>
 
       <h4>Shipping</h4>
-      <div class="horizontal layout">
+      <div class="horizontal layout wrap">
         <paper-input name="country" class="country" label="Country" placeholder="United States" required auto-validate></paper-input>
         <gold-zip-input name"mail-zip" required auto-validate></gold-zip-input>
       </div>
