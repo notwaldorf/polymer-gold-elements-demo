@@ -52,11 +52,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     .quantity {
-      width: 120px;
+      display: inline-block;
+      width: 30px;
+      text-align: center;
+      padding-left: 10px;
     }
 
     h4 {
-      margin-bottom: 0px;
+      margin-bottom: 10px;
     }
 
     paper-button {
@@ -71,7 +74,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </div>
     <form is="iron-form" id="form">
 
-      Quantity: <paper-input name="quantity" class="quantity" value="1" type="number"></paper-input>
+      <h4>Quantity: <paper-input name="quantity" class="quantity" value="1" type="number"></paper-input></h4>
       <h4>Contact Information</h4>
 
 
