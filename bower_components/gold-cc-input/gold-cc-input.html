@@ -87,7 +87,7 @@ style this element.
             required$="[[required]]"
             allowed-pattern="[0-9]"
             prevent-invalid-input
-            autocomplete$="[[autocomplete]]"
+            autocomplete="cc-number"
             name$="[[name]]">
         <div class="icon-container"><iron-icon id="icon"></iron-icon></div>
       </div>
@@ -179,7 +179,7 @@ style this element.
 
       // We don't have icons for all the card types.
       if (valid && result.card_type.icon) {
-        this.$.icon.src ='../' + result.card_type.icon;
+        this.$.icon.src = this.resolveUrl(result.card_type.icon);
         this.$.icon.alt = this.cardType;
         this.$.icon.hidden = false;
       } else {

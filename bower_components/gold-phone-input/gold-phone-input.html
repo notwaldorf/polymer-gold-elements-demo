@@ -59,8 +59,7 @@ style this element.
 <dom-module id="gold-phone-input">
   <style>
   :host {
-    display: inline-block;
-    white-space: nowrap;
+    display: block;
   }
 
   /* TODO: This should be a dropdown */
@@ -87,7 +86,7 @@ style this element.
           bind-value="{{value}}"
           name$="[[name]]"
           allowed-pattern="[0-9]"
-          autocomplete$="[[autocomplete]]"
+          autocomplete="tel"
           prevent-invalid-input>
       </div>
 

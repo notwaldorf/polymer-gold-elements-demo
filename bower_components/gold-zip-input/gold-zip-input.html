@@ -51,8 +51,7 @@ style this element.
 <dom-module id="gold-zip-input">
   <style>
   :host {
-    display: inline-block;
-    white-space: nowrap;
+    display: block;
   }
   </style>
 
@@ -74,7 +73,7 @@ style this element.
           type="tel"
           maxlength="10"
           bind-value="{{value}}"
-          autocomplete$="[[autocomplete]]"
+          autocomplete="postal-code"
           name$="[[name]]">
 
       <template is="dom-if" if="[[errorMessage]]">

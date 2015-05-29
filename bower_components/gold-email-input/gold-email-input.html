@@ -49,7 +49,6 @@ style this element.
   <style>
   :host {
     display: block;
-    white-space: nowrap;
   }
   </style>
 
@@ -69,7 +68,7 @@ style this element.
           aria-describedby$="[[_ariaDescribedBy]]"
           validator="email-validator"
           bind-value="{{value}}"
-          autocomplete$="[[autocomplete]]"
+          autocomplete="email"
           name$="[[name]]">
 
       <template is="dom-if" if="[[errorMessage]]">

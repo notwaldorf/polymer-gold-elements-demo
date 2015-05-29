@@ -18,38 +18,37 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <title>gold-cc-cvc-input demo</title>
 
   <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-
   <link rel="import" href="../gold-cc-cvc-input.html">
 
-  <link rel="stylesheet" href="../../paper-styles/demo.css">
-
+  <link rel="stylesheet" href="../../paper-styles/paper-styles.html">
+  <link rel="import" href="../../paper-styles/demo-pages.html">
 </head>
 <style>
   gold-cc-cvc-input {
-    width: 200px;
-  }
-
-  gold-cc-cvc-input.small {
-    width: 100px;
+    width: 80px;
+    margin-left: auto;
+    margin-right: auto;
   }
 </style>
 <body>
-  <section>
-    <h4>Non-Amex CC, prevents invalid input</h4>
-    <gold-cc-cvc-input class="small"></gold-cc-cvc-input>
-  </section>
+  <div class="vertical-section-container centered">
+    <h4>Standard</h4>
+    <div class="vertical-section layout horizontal">
+        <gold-cc-cvc-input class="small"></gold-cc-cvc-input>
+        <gold-cc-cvc-input class="small" label="AMEX" amex></gold-cc-cvc-input>
+        <gold-cc-cvc-input auto-validate label="Auto"></gold-cc-cvc-input>
+    </div>
 
-  <section>
-    <h4>Amex CC, prevents invalid input</h4>
-    <gold-cc-cvc-input class="small" label="AMEX CVC" amex></gold-cc-cvc-input>
-  </section>
+    <h4>Pre-validated</h4>
+    <div class="vertical-section  layout horizontal">
+      <gold-cc-cvc-input required auto-validate value="123"></gold-cc-cvc-input>
+      <gold-cc-cvc-input required auto-validate amex value="1234"></gold-cc-cvc-input>
+      <gold-cc-cvc-input required auto-validate value="12"></gold-cc-cvc-input>
+    </div>
 
-  <section>
-    <h4>Auto-validating input</h4>
-    <gold-cc-cvc-input required auto-validate></gold-cc-cvc-input>
-
-    <h4>With custom error message</h4>
-    <gold-cc-cvc-input required auto-validate error-message="Please enter a valid CVC"></gold-cc-cvc-input>
-  </section>
-
+    <h4>Custom error message</h4>
+    <div class="vertical-section">
+      <gold-cc-cvc-input required auto-validate error-message="Please enter a valid CVC"></gold-cc-cvc-input>
+    </div>
+  </div>
 </body>
