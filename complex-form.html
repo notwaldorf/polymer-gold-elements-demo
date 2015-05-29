@@ -1,0 +1,129 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-styles/color.html">
+
+<link rel="import"href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="bower_components/paper-styles/color.html">
+<link rel="import" href="bower_components/iron-form/iron-form.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/gold-cc-input/gold-cc-input.html">
+<link rel="import" href="bower_components/gold-cc-cvc-input/gold-cc-cvc-input.html">
+<link rel="import" href="bower_components/gold-cc-expiration-input/gold-cc-expiration-input.html">
+<link rel="import" href="bower_components/gold-zip-input/gold-zip-input.html">
+<link rel="import" href="bower_components/gold-email-input/gold-email-input.html">
+<link rel="import" href="bower_components/gold-phone-input/gold-phone-input.html">
+
+<dom-module id="complex-form">
+
+  <link rel="import" type="css" href="simple-form.css">
+
+  <style>
+    gold-cc-expiration-input, gold-cc-cvc-input {
+      width: 120px;
+      margin-right: 20px;
+    }
+
+    gold-zip-input {
+      width: 120px;
+    }
+
+    gold-email-input {
+      width: 300px;
+      margin-right: 20px;
+    }
+
+    gold-phone-input {
+      width: 200px;
+    }
+
+    .country {
+      width: 260px;
+      margin-right: 20px;
+    }
+
+    .quantity {
+      width: 120px;
+    }
+
+    h4 {
+      margin-bottom: 0px;
+    }
+
+    paper-button {
+      width: 100%;
+    }
+  </style>
+  <template>
+    <div class="horizontal layout center form-title">
+      <div class="avatar" item-icon></div>
+      <div class="flex company">ACME Goods Co.</div>
+      <br><br>
+    </div>
+    <form is="iron-form" id="form">
+
+      Quantity: <paper-input name="quantity" class="quantity" value="1" type="number"></paper-input>
+      <h4>Contact Information</h4>
+
+
+      <paper-input name="name" label="Name" required auto-validate></paper-input>
+      <paper-input name="address" label="Address" required auto-validate></paper-input>
+
+      <div class="horizontal layout">
+        <gold-email-input name="email" required auto-validate></gold-email-input>
+        <gold-phone-input name="phone" required auto-validate></gold-phone-input>
+      </div>
+
+      <h4>Payment</h4>
+
+      <gold-cc-input name="cc" required auto-validate
+          value="4000 0000 0000 0002"
+          label="Sample Valid VISA number">
+      </gold-cc-input>
+
+      <div class="horizontal layout">
+        <gold-cc-expiration-input name="cc-expiration" required auto-validate></gold-cc-expiration-input>
+        <gold-cc-cvc-input name="cc-cvc" required auto-validate></gold-cc-cvc-input>
+        <gold-zip-input name="zip" required auto-validate></gold-zip-input>
+      </div>
+
+      <h4>Shipping</h4>
+      <div class="horizontal layout">
+        <paper-input name="country" class="country" label="Country" placeholder="United States" required auto-validate></paper-input>
+        <gold-zip-input name"mail-zip" required auto-validate></gold-zip-input>
+      </div>
+
+      <paper-button on-click="_submit">Pay</paper-button>
+
+    </form>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'complex-form',
+
+    listeners: {
+      'iron-form-submit': '_formSubmitted'
+    },
+
+    _submit: function() {
+      this.$.form.submit();
+    },
+
+    _formSubmitted: function(event) {
+      console.log("Submitted: ", event.detail);
+    }
+
+  });
+</script>

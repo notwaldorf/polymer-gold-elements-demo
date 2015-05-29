@@ -1,0 +1,92 @@
+<!--
+@license
+Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
+This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
+The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
+The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
+Code distributed by Google as part of the polymer project is also
+subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+-->
+
+<link rel="import" href="bower_components/polymer/polymer.html">
+<link rel="import" href="bower_components/paper-styles/color.html">
+
+<link rel="import"href="bower_components/iron-flex-layout/classes/iron-flex-layout.html">
+<link rel="import" href="bower_components/iron-form/iron-form.html">
+<link rel="import" href="bower_components/paper-styles/color.html">
+<link rel="import" href="bower_components/paper-input/paper-input.html">
+<link rel="import" href="bower_components/paper-button/paper-button.html">
+<link rel="import" href="bower_components/gold-cc-input/gold-cc-input.html">
+<link rel="import" href="bower_components/gold-cc-cvc-input/gold-cc-cvc-input.html">
+<link rel="import" href="bower_components/gold-cc-expiration-input/gold-cc-expiration-input.html">
+
+<dom-module id="simple-form">
+
+  <link rel="import" type="css" href="simple-form.css">
+
+  <template>
+    <div class="horizontal layout center form-title">
+      <div class="avatar" item-icon></div>
+      <div class="flex company">ACME Goods Co.</div>
+    </div>
+    
+    <form is="iron-form" id="form">
+
+      <paper-input name="name" label="Name on card" required></paper-input>
+
+      <gold-cc-input name="cc-number" required value="4000 0000 0000 0002"></gold-cc-input>
+
+      <div class="horizontal layout">
+        <gold-cc-expiration-input name="cc-expiration" required></gold-cc-expiration-input>
+        <gold-cc-cvc-input name="cc-cvc" required></gold-cc-cvc-input>
+      </div>
+
+      <br><br>
+
+      <div class="horizontal layout">
+        <div class="filler"></div>
+        <div class="footer">
+          <div class="total-item horizontal layout">
+            <div class="flex">Sub total </div>
+            <div class="price">$30</div>
+          </div>
+
+          <div class="total-item horizontal layout">
+            <div class="flex">Tax </div>
+            <div class="price">$2.99</div>
+          </div>
+
+          <div class="total-item horizontal layout">
+            <div class="flex">Your total </div>
+            <div class="price">$32.99</div>
+          </div>
+
+          <div class="horizontal layout end-justified">
+            <paper-button on-click="_submit">Pay $32.99</paper-button>
+          </div>
+        </div>
+      </div>
+
+    </form>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+
+    is: 'simple-form',
+
+    listeners: {
+      'iron-form-submit': '_formSubmitted'
+    },
+
+    _submit: function() {
+      this.$.form.submit();
+    },
+
+    _formSubmitted: function(event) {
+      console.log("Submitted: ", event.detail);
+    }
+
+  });
+</script>
