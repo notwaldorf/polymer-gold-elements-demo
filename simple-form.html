@@ -81,7 +81,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     _submit: function() {
-      this.$.form.submit();
+      var form = this.$.form;
+      if (form.requestAutocomplete)
+        form.requestAutocomplete();
+
+      form.submit();
     },
 
     _formSubmitted: function(event) {
