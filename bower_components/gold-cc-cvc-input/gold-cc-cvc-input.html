@@ -23,11 +23,16 @@ for entering a credit card's CVC (Card Verification Code). It supports both
 
     <gold-cc-cvc-input></gold-cc-cvc-input>
 
-    <gold-cc-cvc-input amex></gold-cc-cvc-input>
+    <gold-cc-cvc-input card-type="amex"></gold-cc-cvc-input>
 
 It may include an optional label, which by default is "CVC".
 
     <gold-cc-cvc-input label="Card Verification Value"></gold-cc-cvc-input>
+
+It can be used together with a `gold-cc-input` by binding the `cardType` property:
+
+    <gold-cc-input card-type="{{cardType}}"></gold-cc-input>
+    <gold-cc-cvc-input card-type="[[cardType]]"></gold-cc-cvc-input>
 
 ### Validation
 
@@ -64,7 +69,11 @@ style this element.
   </style>
 
   <template>
-    <paper-input-container id="container">
+    <paper-input-container id="container"
+        disabled$="[[disabled]]"
+        no-label-float="[[noLabelFloat]]"
+        always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]"
+        invalid="[[invalid]]">
 
       <label hidden$="[[!label]]">[[label]]</label>
 
@@ -78,10 +87,17 @@ style this element.
             type="tel"
             maxlength$="[[_requiredLength]]"
             autocomplete="cc-csc"
-            name$="[[name]]">
+            name$="[[name]]"
+            disabled$="[[disabled]]"
+            invalid="{{invalid}}"
+            autofocus$="[[autofocus]]"
+            inputmode$="[[inputmode]]"
+            placeholder$="[[placeholder]]"
+            readonly$="[[readonly]]"
+            size$="[[size]]">
 
-        <iron-icon id="icon" src="cvc_hint.png" hidden$="[[amex]]" alt="cvc"></iron-icon>
-        <iron-icon id="amexIcon" hidden$="[[!amex]]" src="cvc_hint_amex.png" alt="amex cvc"></iron-icon>
+        <iron-icon id="icon" src="cvc_hint.png" hidden$="[[_amex]]" alt="cvc"></iron-icon>
+        <iron-icon id="amexIcon" hidden$="[[!_amex]]" src="cvc_hint_amex.png" alt="amex cvc"></iron-icon>
       </div>
 
       <template is="dom-if" if="[[errorMessage]]">
@@ -109,16 +125,21 @@ style this element.
       },
 
       /**
-       * Set to true if the card that the CVC is for is an AMEX.
+       * The type of card that the CVC is for.
        */
-      amex: {
-        type: Boolean,
-        value: false
+      cardType: {
+        type: String,
+        value: ''
       },
 
       _requiredLength: {
         type: Number,
-        computed: '_computeRequiredLength(amex)'
+        computed: '_computeRequiredLength(cardType)'
+      },
+
+      _amex: {
+        type: Boolean,
+        computed: '_computeIsAmex(cardType)'
       }
     },
 
@@ -141,8 +162,12 @@ style this element.
       }
     },
 
-    _computeRequiredLength: function(amex) {
-      return this.amex ? 4 : 3;
+    _computeRequiredLength: function(cardType) {
+      return this._computeIsAmex(cardType) ? 4 : 3;
+    },
+
+    _computeIsAmex: function(cardType) {
+      return cardType.toLowerCase() == 'amex';
     },
 
     validate: function() {

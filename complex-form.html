@@ -77,12 +77,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
       <gold-cc-input name="cc" required auto-validate
           value="4000 0000 0000 0002"
-          label="Sample Valid VISA number">
+          label="Sample Valid VISA number"
+          card-type="{{cardType}}">
       </gold-cc-input>
 
       <div class="horizontal layout wrap">
         <gold-cc-expiration-input name="cc-expiration" required auto-validate></gold-cc-expiration-input>
-        <gold-cc-cvc-input name="cc-cvc" required auto-validate></gold-cc-cvc-input>
+        <gold-cc-cvc-input name="cc-cvc" required auto-validate card-type="[[cardType]]"></gold-cc-cvc-input>
         <gold-zip-input name="zip" required auto-validate></gold-zip-input>
       </div>
 
