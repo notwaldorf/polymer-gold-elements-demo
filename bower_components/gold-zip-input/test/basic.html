@@ -49,14 +49,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         assert.isTrue(container.invalid);
       });
 
-      test('too many dashes are not ok', function() {
+      test('input is formatted ok', function() {
         var input = fixture('basic');
-        input.value='90210--1111';
-        forceXIfStamp(input);
-
-        var container = Polymer.dom(input.root).querySelector('paper-input-container');
-        assert.ok(container, 'paper-input-container exists');
-        assert.isTrue(container.invalid);
+        input.value='902101111';
+        assert.equal(input.value, '90210-1111');
       });
 
       test('spaces instead of dashes are not ok', function() {
@@ -96,6 +92,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var error = Polymer.dom(input.root).querySelector('paper-input-error');
         assert.ok(error, 'paper-input-error exists');
         assert.notEqual(getComputedStyle(error).display, 'none', 'error is not display:none');
+      });
+
+      test('caret position is preserved', function() {
+        var input = fixture('basic');
+        var ironInput = Polymer.dom(input.root).querySelector('input[is="iron-input"]');
+        input.value='11111-11';
+        ironInput.selectionStart = 2;
+        ironInput.selectionEnd = 2;
+        input._computeValue('11221-1111');
+
+        assert.equal(ironInput.selectionStart, 2, 'selectionStart is preserved');
+        assert.equal(ironInput.selectionEnd, 2, 'selectionEnd is preserved');
       });
 
     });

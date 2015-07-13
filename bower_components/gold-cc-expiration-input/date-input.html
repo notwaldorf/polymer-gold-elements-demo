@@ -60,9 +60,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           prevent-invalid-input
           autocomplete="cc-exp-month"
           type="tel"
-          class="flex">
+          class="flex"
+          disabled$="[[disabled]]"
+          invalid="{{invalid}}"
+          autofocus$="[[autofocus]]"
+          inputmode$="[[inputmode]]"
+          placeholder$="[[placeholder]]"
+          readonly$="[[readonly]]">
       <span>/</span>
       <input is="iron-input"
+          id="expirationYear"
           aria-labelledby$="[[_computeAriaLabel(ariaLabelPrefix,'yearLabel')]]"
           required$="[[required]]"
           maxlength="2"
@@ -72,7 +79,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           prevent-invalid-input
           autocomplete="cc-exp-year"
           type="tel"
-          class="flex">
+          class="flex"
+          disabled$="[[disabled]]"
+          invalid="{{invalid}}"
+          autofocus$="[[autofocus]]"
+          inputmode$="[[inputmode]]"
+          placeholder$="[[placeholder]]"
+          readonly$="[[readonly]]">
     </div>
   </template>
 
@@ -137,6 +150,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       // Months are 0-11.
       this.date = {month: month, year: year};
       this.fire('dateChanged', this.date);
+      // Advance cursor to year after month entry
+      if (month.length === 2) {
+        this.$.expirationYear.focus();
+      }
     },
 
     validate: function() {

@@ -1,33 +1,33 @@
 BUILD LOG
 ---------
-Build Time: 2015-06-03T16:30:51-0700
+Build Time: 2015-07-09T14:48:58-0700
 
 NODEJS INFORMATION
 ==================
-nodejs: v2.0.2
+nodejs: v2.3.3
 gulp: 3.9.0
 gulp-audit: 1.0.0
-gulp-concat: 2.5.2
+gulp-concat: 2.6.0
 gulp-header: 1.2.2
 gulp-uglify: 1.2.0
-run-sequence: 1.1.0
-web-component-tester: 3.1.4
+run-sequence: 1.1.1
+web-component-tester: 3.2.0
 
 REPO REVISIONS
 ==============
-webcomponentsjs: da802598acc91d10d0205cf6130d15bd75fa12d1
+webcomponentsjs: b0f4eff3e501b07960de40386bcac47c2afeb851
 
 BUILD HASHES
 ============
-CustomElements.js: 89978a89cdf96d509b8e399bf8e6aff4431c41ea
-CustomElements.min.js: e8d9ac81e56720cccef8e1ba01400d4f403531b1
-HTMLImports.js: 5a393509ce18b7ee605cd4474750e783a6afa5a5
-HTMLImports.min.js: 6ce4c8c1340b3ceea4a2c05942cf4e8ef685fae3
-MutationObserver.js: 60074504bbdf487e192215647375bffb70888997
-MutationObserver.min.js: 76658a548e3785ee931d45fad4a0bd2b81594aa3
-ShadowDOM.js: 35dceaf9eca85b593764a05b5324173e84f07608
-ShadowDOM.min.js: 80ab65804971765c3450864b24f108efd8bd6086
-webcomponents-lite.js: 94a081e93a4b2c65e645787b6e69c2a0aac204ff
-webcomponents-lite.min.js: 80158c463eb7fda32995d908b9fbabcf95595c0e
-webcomponents.js: de93a7fee51ce01dd61546598f12e481755c44ca
-webcomponents.min.js: 0a70cae0a9589e463aa36d1ec9c1fbc87c1b1c5c
+CustomElements.js: 1ff9c23ef55581aadb5a50655991fcba1636d2a6
+CustomElements.min.js: 6e0b479f58c532480dfd1d3dc139c473f52e294c
+HTMLImports.js: a90ec72d207a969c56c4ff90913ec2b39a8b3bf9
+HTMLImports.min.js: 564b11763a82f4cd1264be0573201692b5c50948
+MutationObserver.js: e3321d300deb7a866867338be3adce94bb23abb1
+MutationObserver.min.js: 3a46adba0a5cdbb3a715a67bce650360e6698615
+ShadowDOM.js: bfe2d7926de503650f95396e7e86f08bc052dbe2
+ShadowDOM.min.js: 10349ae64abd33583e70938a988e557b974e31bb
+webcomponents-lite.js: c43501d2096a2df3f09b371683ee8ba40e78afea
+webcomponents-lite.min.js: e609a0b6f32ff4563b96b4f2a0729cf330ed708c
+webcomponents.js: ebc995d9ff946a4cf0777ab04351aad28bc3ea03
+webcomponents.min.js: 88447a12ec66927d1159fd9ead01bf87a2fdd927

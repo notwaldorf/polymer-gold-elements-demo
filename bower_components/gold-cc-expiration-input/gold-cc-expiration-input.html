@@ -62,7 +62,9 @@ style this element.
     <paper-input-container id="container"
         always-float-label
         auto-validate="[[autoValidate]]"
-        attr-for-value="date">
+        attr-for-value="date"
+        disabled$="[[disabled]]"
+        invalid="[[invalid]]">
 
       <label hidden$="[[!label]]">[[label]]</label>
 
@@ -71,7 +73,13 @@ style this element.
           required$="[[required]]"
           month="[[_computeMonth(value)]]"
           year="[[_computeYear(value)]]"
-          autocomplete$="[[autocomplete]]">
+          autocomplete$="[[autocomplete]]"
+          disabled$="[[disabled]]"
+          invalid="{{invalid}}"
+          autofocus$="[[autofocus]]"
+          inputmode$="[[inputmode]]"
+          placeholder$="[[placeholder]]"
+          readonly$="[[readonly]]">
       </date-input>
 
       <template is="dom-if" if="[[errorMessage]]">

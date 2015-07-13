@@ -65,7 +65,11 @@ Custom property | Description | Default
 `--paper-input-container-input-color` | Input foreground color | `--primary-text-color`
 `--paper-input-container` | Mixin applied to the container | `{}`
 `--paper-input-container-label` | Mixin applied to the label | `{}`
+`--paper-input-container-label-focus` | Mixin applied to the label when the input is focused | `{}`
 `--paper-input-container-input` | Mixin applied to the input | `{}`
+`--paper-input-container-underline` | Mixin applied to the underline | `{}`
+`--paper-input-container-underline-focus` | Mixin applied to the underline when the input is focued | `{}`
+`--paper-input-container-underline-disabled` | Mixin applied to the underline when the input is disabled | `{}`
 
 This element is `display:block` by default, but you can set the `inline` attribute to make it
 `display:inline-block`.
@@ -107,9 +111,11 @@ This element is `display:block` by default, but you can set the `inline` attribu
       transform: scale3d(0,1,1);
 
       background: var(--paper-input-container-focus-color, --default-primary-color);
+
+      @apply(--paper-input-container-underline-focus);
     }
 
-    .is-highlighted .focused-line {
+    .underline.is-highlighted .focused-line {
       -webkit-transform: none;
       transform: none;
       -webkit-transition: -webkit-transform 0.25s;
@@ -118,7 +124,7 @@ This element is `display:block` by default, but you can set the `inline` attribu
       @apply(--paper-transition-easing);
     }
 
-    .is-invalid .focused-line {
+    .underline.is-invalid .focused-line {
       background: var(--paper-input-container-invalid-color, --google-red-500);
 
       -webkit-transform: none;
@@ -132,12 +138,16 @@ This element is `display:block` by default, but you can set the `inline` attribu
     .unfocused-line {
       height: 1px;
       background: var(--paper-input-container-color, --secondary-text-color);
+
+      @apply(--paper-input-container-underline);
     }
 
     :host([disabled]) .unfocused-line {
       border-bottom: 1px dashed;
       border-color: var(--paper-input-container-color, --secondary-text-color);
       background: transparent;
+
+      @apply(--paper-input-container-underline-disabled);
     }
 
     .input-content {
@@ -172,6 +182,8 @@ This element is `display:block` by default, but you can set the `inline` attribu
     .input-content.label-is-highlighted ::content label,
     .input-content.label-is-highlighted ::content .paper-input-label {
       color: var(--paper-input-container-focus-color, --default-primary-color);
+
+      @apply(--paper-input-container-label-focus);
     }
 
     .input-content.is-invalid ::content label,
@@ -305,10 +317,10 @@ This element is `display:block` by default, but you can set the `inline` attribu
       },
 
       _addons: {
-        type: Array,
-        value: function() {
-          return [];
-        }
+        type: Array
+        // do not set a default value here intentionally - it will be initialized lazily when a
+        // distributed child is attached, which may occur before configuration for this element
+        // in polyfill.
       },
 
       _inputHasContent: {
@@ -338,7 +350,7 @@ This element is `display:block` by default, but you can set the `inline` attribu
       _boundOnInput: {
         type: Function,
         value: function() {
-          this._onInput.bind(this)
+          return this._onInput.bind(this);
         }
       },
 
@@ -369,6 +381,9 @@ This element is `display:block` by default, but you can set the `inline` attribu
     },
 
     ready: function() {
+      if (!this._addons) {
+        this._addons = [];
+      }
       this.addEventListener('focus', this._boundOnFocus, true);
       this.addEventListener('blur', this._boundOnBlur, true);
       if (this.attrForValue) {
@@ -383,8 +398,16 @@ This element is `display:block` by default, but you can set the `inline` attribu
     },
 
     _onAddonAttached: function(event) {
-      this._addons.push(event.target);
-      this._handleValue(this._inputElement);
+      if (!this._addons) {
+        this._addons = [];
+      }
+      var target = event.target;
+      if (this._addons.indexOf(target) === -1) {
+        this._addons.push(target);
+        if (this.isAttached) {
+          this._handleValue(this._inputElement);
+        }
+      }
     },
 
     _onFocus: function() {

@@ -13,7 +13,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../paper-input/paper-input-error.html">
 <link rel="import" href="../iron-input/iron-input.html">
 <link rel="import" href="../iron-form-element-behavior/iron-form-element-behavior.html">
-<link rel="import" href="email-validator.html">
 
 <!--
 `<gold-email-input>` is a single-line text field with Material Design styling
@@ -55,21 +54,28 @@ style this element.
   <template>
 
     <paper-input-container id="container"
-        auto-validate="[[autoValidate]]"
-        attr-for-value="bind-value">
+        disabled$="[[disabled]]"
+        no-label-float="[[noLabelFloat]]"
+        always-float-label="[[_computeAlwaysFloatLabel(alwaysFloatLabel,placeholder)]]"
+        invalid="[[invalid]]">
 
       <label hidden$="[[!label]]">[[label]]</label>
 
-      <email-validator></email-validator>
-
       <input is="iron-input" id="input"
           required$="[[required]]"
+          disabled$="[[disabled]]"
           aria-labelledby$="[[_ariaLabelledBy]]"
           aria-describedby$="[[_ariaDescribedBy]]"
           validator="email-validator"
           bind-value="{{value}}"
           autocomplete="email"
-          name$="[[name]]">
+          name$="[[name]]"
+          invalid="{{invalid}}"
+          autofocus$="[[autofocus]]"
+          inputmode$="[[inputmode]]"
+          placeholder$="[[placeholder]]"
+          readonly$="[[readonly]]"
+          size$="[[size]]">
 
       <template is="dom-if" if="[[errorMessage]]">
         <paper-input-error id="error">[[errorMessage]]</paper-input-error>
@@ -98,8 +104,52 @@ style this element.
       label: {
         type: String,
         value: "Email"
+      },
+
+      /**
+       * The regular expression used to validate the email. Defaults to the
+       * regular expression defined in the spec: http://www.w3.org/TR/html-markup/input.email.html#input.email.attrs.value.single.
+       * If left blank, then no validation will be applied.
+       */
+      regex: {
+        type: String,
+        value: '^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$'
       }
-    }
+    },
+
+    listeners: {
+      'input': '_onInput'
+    },
+
+    ready: function() {
+      this._onInput();
+    },
+
+    _onInput: function() {
+      if (this.autoValidate) {
+        this.validate();
+      }
+    },
+
+    validate: function() {
+      // Empty, non-required input is valid. A blank regex means everything is valid.
+      if ((!this.required && this.value == '') || this.regex == '') {
+        return true;
+      }
+
+      // A blank regex mean everything is allowed.
+      var valid = new RegExp(this.regex, "i").test(this.value);
+
+      // Update the container and its addons (i.e. the custom error-message).
+      this.$.container.invalid = !valid;
+      this.$.container.updateAddons({
+        inputElement: this.$.input,
+        value: this.value,
+        invalid: !valid
+      });
+
+      return valid;
+    },
 
   })
 
