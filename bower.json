@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "homepage": "https://github.com/notwaldorf/polymer-gold-elements-demo",
   "authors": [
-    "The Polymer Authors"
+    "Monica Dinculescu <noms@google.com>"
   ],
   "description": "A checkout form using gold elements",
   "main": "index.html",
@@ -14,7 +14,6 @@
     "ecommerce",
     "checkout"
   ],
-  "license": "http://polymer.github.io/LICENSE.txt",
   "ignore": [
     "**/.*",
     "node_modules",
